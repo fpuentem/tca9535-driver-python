@@ -31,7 +31,7 @@ class Value(IntEnum):
     LOW = 0
 
 class TCA9535():
-    def __init__(self, i2c_bus='/dev/i2c-1', address=0x20):
+    def __init__(self, i2c_bus='/dev/i2c-0', address=0x77):
         # I2C bus
         # self.i2c = I2C(i2c_bus)
 
@@ -48,16 +48,66 @@ class TCA9535():
         self.CONF_PORT_0_ADDR = 0x06
         self.CONF_PORT_1_ADDR = 0x07
 
-        # Control register values
+        # Control register values(default)
         self.INPUT_PORT_0 = 0x00 
-        self.INPUT_PORT_1 = 0x02
+        self.INPUT_PORT_1 = 0x00
         self.OUTPUT_PORT_0 = 0xFF
         self.OUTPUT_PORT_1 = 0xFF
         self.POLARITY_INV_PORT_0 = 0x00
         self.POLARITY_INV_PORT_1 = 0x00
         self.CONF_PORT_0 = 0xFF
         self.CONF_PORT_1 = 0xFF
-    
+
+        # Read registers from device
+        # Input Port 0 
+        q = [I2C.Message([self.INPUT_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
+        self.i2c.transfer(self.address, q)
+        self.INPUT_PORT_0 = q[1].data 
+        print("INPUT_PORT_0 = 0x{:02x}".format(self.INPUT_PORT_0))
+
+        # Input Port 1
+        q = [I2C.Message([self.INPUT_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
+        self.i2c.transfer(self.address, q)
+        self.INPUT_PORT_1 = q[1].data 
+        print("INPUT_PORT_1 = 0x{:02x}".format(self.INPUT_PORT_1))
+
+        # Output Port 0
+        q = [I2C.Message([self.OUTPUT_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
+        self.i2c.transfer(self.address, q)
+        self.OUTPUT_PORT_0 = q[1].data
+        print("OUTPUT_PORT_0 = 0x{:02x}".format(self.OUTPUT_PORT_0)) 
+
+        # Output Port 1
+        q = [I2C.Message([self.OUTPUT_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
+        self.i2c.transfer(self.address, q)
+        self.OUTPUT_PORT_1 = q[1].data 
+        print("OUTPUT_PORT_1 = 0x{:02x}".format(self.OUTPUT_PORT_1))
+
+        # Polarity Inversion Port 0 
+        q = [I2C.Message([self.POLARITY_INV_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
+        self.i2c.transfer(self.address, q)
+        self.POLARITY_INV_PORT_0 = q[1].data 
+        print("POLARITY_INV_PORT_0 = 0x{:02x}".format(self.POLARITY_INV_PORT_0))
+
+        # Polarity Inversion Port 1
+        q = [I2C.Message([self.POLARITY_INV_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
+        self.i2c.transfer(self.address, q)
+        self.POLARITY_INV_PORT_1 = q[1].data 
+        print("POLARITY_INV_PORT_1 = 0x{:02x}".format(self.POLARITY_INV_PORT_1))
+
+        # Configuration Port 0
+        q = [I2C.Message([self.CONF_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
+        self.i2c.transfer(self.address, q)
+        self.CONF_PORT_0 = q[1].data 
+        print("CONF_PORT_0 = 0x{:02x}".format(self.CONF_PORT_0))
+
+        # Configuration Port 1
+        q = [I2C.Message([self.CONF_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
+        self.i2c.transfer(self.address, q)
+        self.CONF_PORT_1 = q[1].data 
+        print("CONF_PORT_1 = 0x{:02x}".format(self.CONF_PORT_1))
+
+
     def pin_mode(self, pin, mode):
         print("Pin Mode")
         
@@ -158,6 +208,13 @@ class TCA9535():
     def get_pins_mode(self, pin):
         pass
 
+    def generate_command(self, register, value):
+        return [I2C.Message([register, value])]
+    
+	def send_command(self, address, cmd, wait=True):
+		self.i2c.transfer(address, cmd)
+		if wait:
+			time.sleep(0.005) # sleep for 5 ms
 
 
 if __name__ == '__main__':
@@ -165,7 +222,7 @@ if __name__ == '__main__':
     dev = TCA9535()
 
     # Configure pin mode OUTPUT
-    dev.pin_mode(Pin.P0_0, Mode.INPUT)
+    # dev.pin_mode(Pin.P0_0, Mode.INPUT)
     # dev.pin_mode(Pin.P0_2, Mode.OUTPUT)
     # dev.pin_mode(Pin.P0_4, Mode.OUTPUT)
     # dev.pin_mode(Pin.P0_6, Mode.OUTPUT)
@@ -196,5 +253,5 @@ if __name__ == '__main__':
     # time.sleep(1)
 
     # Digital read
-    print(dev.digital_read(Pin.P0_1))
-    print(dev.digital_read(Pin.P1_1))
+    # print(dev.digital_read(Pin.P0_1))
+    # print(dev.digital_read(Pin.P1_1))
