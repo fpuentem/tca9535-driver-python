@@ -58,54 +58,54 @@ class TCA9535():
         self.CONF_PORT_0 = 0xFF
         self.CONF_PORT_1 = 0xFF
 
-        # Read registers from device
-        # Input Port 0 
-        q = [I2C.Message([self.INPUT_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
-        self.i2c.transfer(self.address, q)
-        self.INPUT_PORT_0 = q[1].data 
-        print("INPUT_PORT_0 = 0x{:02x}".format(self.INPUT_PORT_0))
+        # # Read registers from device
+        # # Input Port 0 
+        # q = [I2C.Message([self.INPUT_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
+        # self.i2c.transfer(self.address, q)
+        # self.INPUT_PORT_0 = q[1].data 
+        # print("INPUT_PORT_0 = 0x{:02x}".format(self.INPUT_PORT_0))
 
-        # Input Port 1
-        q = [I2C.Message([self.INPUT_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
-        self.i2c.transfer(self.address, q)
-        self.INPUT_PORT_1 = q[1].data 
-        print("INPUT_PORT_1 = 0x{:02x}".format(self.INPUT_PORT_1))
+        # # Input Port 1
+        # q = [I2C.Message([self.INPUT_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
+        # self.i2c.transfer(self.address, q)
+        # self.INPUT_PORT_1 = q[1].data 
+        # print("INPUT_PORT_1 = 0x{:02x}".format(self.INPUT_PORT_1))
 
-        # Output Port 0
-        q = [I2C.Message([self.OUTPUT_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
-        self.i2c.transfer(self.address, q)
-        self.OUTPUT_PORT_0 = q[1].data
-        print("OUTPUT_PORT_0 = 0x{:02x}".format(self.OUTPUT_PORT_0)) 
+        # # Output Port 0
+        # q = [I2C.Message([self.OUTPUT_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
+        # self.i2c.transfer(self.address, q)
+        # self.OUTPUT_PORT_0 = q[1].data
+        # print("OUTPUT_PORT_0 = 0x{:02x}".format(self.OUTPUT_PORT_0)) 
 
-        # Output Port 1
-        q = [I2C.Message([self.OUTPUT_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
-        self.i2c.transfer(self.address, q)
-        self.OUTPUT_PORT_1 = q[1].data 
-        print("OUTPUT_PORT_1 = 0x{:02x}".format(self.OUTPUT_PORT_1))
+        # # Output Port 1
+        # q = [I2C.Message([self.OUTPUT_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
+        # self.i2c.transfer(self.address, q)
+        # self.OUTPUT_PORT_1 = q[1].data 
+        # print("OUTPUT_PORT_1 = 0x{:02x}".format(self.OUTPUT_PORT_1))
 
-        # Polarity Inversion Port 0 
-        q = [I2C.Message([self.POLARITY_INV_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
-        self.i2c.transfer(self.address, q)
-        self.POLARITY_INV_PORT_0 = q[1].data 
-        print("POLARITY_INV_PORT_0 = 0x{:02x}".format(self.POLARITY_INV_PORT_0))
+        # # Polarity Inversion Port 0 
+        # q = [I2C.Message([self.POLARITY_INV_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
+        # self.i2c.transfer(self.address, q)
+        # self.POLARITY_INV_PORT_0 = q[1].data 
+        # print("POLARITY_INV_PORT_0 = 0x{:02x}".format(self.POLARITY_INV_PORT_0))
 
-        # Polarity Inversion Port 1
-        q = [I2C.Message([self.POLARITY_INV_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
-        self.i2c.transfer(self.address, q)
-        self.POLARITY_INV_PORT_1 = q[1].data 
-        print("POLARITY_INV_PORT_1 = 0x{:02x}".format(self.POLARITY_INV_PORT_1))
+        # # Polarity Inversion Port 1
+        # q = [I2C.Message([self.POLARITY_INV_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
+        # self.i2c.transfer(self.address, q)
+        # self.POLARITY_INV_PORT_1 = q[1].data 
+        # print("POLARITY_INV_PORT_1 = 0x{:02x}".format(self.POLARITY_INV_PORT_1))
 
-        # Configuration Port 0
-        q = [I2C.Message([self.CONF_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
-        self.i2c.transfer(self.address, q)
-        self.CONF_PORT_0 = q[1].data 
-        print("CONF_PORT_0 = 0x{:02x}".format(self.CONF_PORT_0))
+        # # Configuration Port 0
+        # q = [I2C.Message([self.CONF_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
+        # self.i2c.transfer(self.address, q)
+        # self.CONF_PORT_0 = q[1].data 
+        # print("CONF_PORT_0 = 0x{:02x}".format(self.CONF_PORT_0))
 
-        # Configuration Port 1
-        q = [I2C.Message([self.CONF_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
-        self.i2c.transfer(self.address, q)
-        self.CONF_PORT_1 = q[1].data 
-        print("CONF_PORT_1 = 0x{:02x}".format(self.CONF_PORT_1))
+        # # Configuration Port 1
+        # q = [I2C.Message([self.CONF_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
+        # self.i2c.transfer(self.address, q)
+        # self.CONF_PORT_1 = q[1].data 
+        # print("CONF_PORT_1 = 0x{:02x}".format(self.CONF_PORT_1))
 
 
     def pin_mode(self, pin, mode):
@@ -129,6 +129,10 @@ class TCA9535():
                 self.CONF_PORT_1 = self.CONF_PORT_1 & ~p        
                 print(">>Pin:{}  Mode:{}".format(int(math.log2(p)), m))
                 print(">>>CONF_PORT_1:{0:b}".format(self.CONF_PORT_1))
+            
+            # cm = self.generate_command(self.CONF_PORT_1_ADDR, self.CONF_PORT_1)
+            # send_command(self.address, cm)
+
         # PORT_0 (P0_0, ... P0_7)
         else:
             # mode
@@ -143,7 +147,12 @@ class TCA9535():
                 # output mode
                 self.CONF_PORT_0 = self.CONF_PORT_0 & ~p
                 print(">>Pin:{}  Mode:{}".format(int(math.log2(p)), m))
-                print(">>>CONF_PORT_0:{0:b}".format(self.CONF_PORT_0))        
+                print(">>>CONF_PORT_0:{0:b}".format(self.CONF_PORT_0))
+
+            # cm = self.generate_command(self.CONF_PORT_0_ADDR, self.CONF_PORT_0)
+            # send_command(self.address, cm)
+
+                
 
     def digital_write(self, pin, value):
         print("digital_write")
@@ -208,13 +217,13 @@ class TCA9535():
     def get_pins_mode(self, pin):
         pass
 
-    def generate_command(self, register, value):
-        return [I2C.Message([register, value])]
+    # def generate_command(self, register, value):
+    #     return [I2C.Message([register, value])]
     
-	def send_command(self, address, cmd, wait=True):
-		self.i2c.transfer(address, cmd)
-		if wait:
-			time.sleep(0.005) # sleep for 5 ms
+	# def send_command(self, address, cmd, wait=True):
+	# 	self.i2c.transfer(address, cmd)
+	# 	if wait:
+	# 		time.sleep(0.005) # sleep for 5 ms
 
 
 if __name__ == '__main__':
@@ -222,24 +231,24 @@ if __name__ == '__main__':
     dev = TCA9535()
 
     # Configure pin mode OUTPUT
-    # dev.pin_mode(Pin.P0_0, Mode.INPUT)
-    # dev.pin_mode(Pin.P0_2, Mode.OUTPUT)
-    # dev.pin_mode(Pin.P0_4, Mode.OUTPUT)
-    # dev.pin_mode(Pin.P0_6, Mode.OUTPUT)
-    # dev.pin_mode(Pin.P1_1, Mode.OUTPUT)
-    # dev.pin_mode(Pin.P1_3, Mode.OUTPUT)
-    # dev.pin_mode(Pin.P1_5, Mode.OUTPUT)
-    # dev.pin_mode(Pin.P1_7, Mode.OUTPUT)
+    dev.pin_mode(Pin.P0_0, Mode.OUTPUT)
+    dev.pin_mode(Pin.P0_2, Mode.OUTPUT)
+    dev.pin_mode(Pin.P0_4, Mode.OUTPUT)
+    dev.pin_mode(Pin.P0_6, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_1, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_3, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_5, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_7, Mode.OUTPUT)
 
     # Configure pin mode INPUT
-    # dev.pin_mode(Pin.P0_0, Mode.INPUT)
-    # dev.pin_mode(Pin.P0_2, Mode.INPUT)
-    # dev.pin_mode(Pin.P0_4, Mode.INPUT)
-    # dev.pin_mode(Pin.P0_6, Mode.INPUT)
-    # dev.pin_mode(Pin.P1_1, Mode.INPUT)
-    # dev.pin_mode(Pin.P1_3, Mode.INPUT)
-    # dev.pin_mode(Pin.P1_5, Mode.INPUT)
-    # dev.pin_mode(Pin.P1_7, Mode.INPUT)
+    dev.pin_mode(Pin.P0_0, Mode.INPUT)
+    dev.pin_mode(Pin.P0_2, Mode.INPUT)
+    dev.pin_mode(Pin.P0_4, Mode.INPUT)
+    dev.pin_mode(Pin.P0_6, Mode.INPUT)
+    dev.pin_mode(Pin.P1_1, Mode.INPUT)
+    dev.pin_mode(Pin.P1_3, Mode.INPUT)
+    dev.pin_mode(Pin.P1_5, Mode.INPUT)
+    dev.pin_mode(Pin.P1_7, Mode.INPUT)
 
     # Digital write
     # dev.digital_write(Pin.P0_1, Value.HIGH)
