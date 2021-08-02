@@ -262,16 +262,20 @@ if __name__ == '__main__':
 #    dev.pin_mode(Pin.P0_5, Mode.OUTPUT)
 #    dev.pin_mode(Pin.P0_7, Mode.OUTPUT)
 #
-#    # Configure pin mode OUTPUT
-#    dev.pin_mode(Pin.P1_0, Mode.OUTPUT)
-#    dev.pin_mode(Pin.P1_2, Mode.OUTPUT)
-#    dev.pin_mode(Pin.P1_4, Mode.OUTPUT)
-#    dev.pin_mode(Pin.P1_6, Mode.OUTPUT)
-#    dev.pin_mode(Pin.P1_1, Mode.OUTPUT)
-#    dev.pin_mode(Pin.P1_3, Mode.OUTPUT)
-#    dev.pin_mode(Pin.P1_5, Mode.OUTPUT)
-#    dev.pin_mode(Pin.P1_7, Mode.OUTPUT)
+    # Configure pin mode OUTPUT
+    dev.pin_mode(Pin.P1_0, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_2, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_4, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_6, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_1, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_3, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_5, Mode.OUTPUT)
+    dev.pin_mode(Pin.P1_7, Mode.OUTPUT)
 
+    # Write a digital pin
+    dev.digital_write(Pin.P1_3, Value.HIGH)
+    time.sleep(2)
+    dev.digital_write(Pin.P1_3, Value.LOW)
 #    # Configure pin mode INPUT
 #    dev.pin_mode(Pin.P0_0, Mode.INPUT)
 #    dev.pin_mode(Pin.P0_2, Mode.INPUT)
