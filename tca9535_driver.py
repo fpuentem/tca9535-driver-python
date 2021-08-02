@@ -168,12 +168,19 @@ class TCA9535():
                 # high value
                 self.OUTPUT_PORT_1 = self.OUTPUT_PORT_1 | p
                 print(">>Pin:{}  Value:{}".format(int(math.log2(p)), v))
-                print(">>>OUTPUT_PORT_1:{0:b}".format(self.OUTPUT_PORT_1)) 
+                print(">>>OUTPUT_PORT_1:{0:b}".format(self.OUTPUT_PORT_1))
+                
+                cm = self.generate_command(self.OUTPUT_PORT_1_ADDR, self.OUTPUT_PORT_1)
+                self.send_command(self.address, cm) 
             else:
                 # low value
                 self.OUTPUT_PORT_1 = self.OUTPUT_PORT_1 & ~p        
                 print(">>Pin:{}  Value:{}".format(int(math.log2(p)), v))
                 print(">>>OUTPUT_PORT_1:{0:b}".format(self.OUTPUT_PORT_1))
+        
+                cm = self.generate_command(self.OUTPUT_PORT_1_ADDR, self.OUTPUT_PORT_1)
+                self.send_command(self.address, cm)
+        
         # PORT_0 (P0_0, ... P0_7)
         else:
             print(">PORT_0")
@@ -183,13 +190,18 @@ class TCA9535():
                 self.OUTPUT_PORT_0 = self.OUTPUT_PORT_0 | p
                 print(">>Pin:{}  Value:{}".format(int(math.log2(p)), v))
                 print(">>>OUTPUT_PORT_0:{0:b}".format(self.OUTPUT_PORT_0)) 
+        
+                cm = self.generate_command(self.OUTPUT_PORT_0_ADDR, self.OUTPUT_PORT_0)
+                self.send_command(self.address, cm)        
             else:
                 # low value
                 self.OUTPUT_PORT_0 = self.OUTPUT_PORT_0 & ~p        
                 print(">>Pin:{}  Value:{}".format(int(math.log2(p)), v))
                 print(">>>OUTPUT_PORT_0:{0:b}".format(self.OUTPUT_PORT_0))
  
-        
+                cm = self.generate_command(self.OUTPUT_PORT_0_ADDR, self.OUTPUT_PORT_0)
+                self.send_command(self.address, cm)
+
     def digital_read(self, pin):
         print("digital_read")
         p = int(pin)
@@ -198,6 +210,10 @@ class TCA9535():
         if p > (1 << 7 + 1 ):
             p = p % (1 << 8)
             # Read I2C PORT_1
+            q = [I2C.Message([self.INPUT_PORT_1_ADDR]), I2C.Message([0x00], read=True)]
+            self.i2c.transfer(self.address, q)
+            self.INPUT_PORT_1 = q[1].data[0] 
+            # print("INPUT_PORT_1 = 0x{:02x}".format(self.INPUT_PORT_1))
             r = (self.INPUT_PORT_1 & p) >> int(math.log2(p))
             if r:
                 return Value.HIGH
@@ -206,6 +222,11 @@ class TCA9535():
         # PORT_0 (P0_0, ... P0_7)
         else:
             # Read I2C PORT_0
+            q = [I2C.Message([self.INPUT_PORT_0_ADDR]), I2C.Message([0x00], read=True)]
+            self.i2c.transfer(self.address, q)
+            self.INPUT_PORT_0 = q[1].data[0] 
+            # print(q[1].data)
+            # print("INPUT_PORT_0 = 0x{:02x}".format(self.INPUT_PORT_0))
             r = (self.INPUT_PORT_0 & p) >> int(math.log2(p))
             if r:
                 return Value.HIGH
