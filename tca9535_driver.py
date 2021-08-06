@@ -31,7 +31,7 @@ class Value(IntEnum):
     LOW = 0
 
 class TCA9535():
-    def __init__(self, i2c_bus='/dev/i2c-0', address=0x77):
+    def __init__(self, i2c_bus='/dev/i2c-0', address=0x20):
         # I2C bus
         self.i2c = I2C(i2c_bus)
 
@@ -262,6 +262,16 @@ if __name__ == '__main__':
 #    dev.pin_mode(Pin.P0_5, Mode.OUTPUT)
 #    dev.pin_mode(Pin.P0_7, Mode.OUTPUT)
 #
+#    dev.digital_write(Pin.P0_0, Value.HIGH)
+#    dev.digital_write(Pin.P0_1, Value.HIGH)
+#    dev.digital_write(Pin.P0_2, Value.HIGH)
+#    dev.digital_write(Pin.P0_3, Value.HIGH)
+#    dev.digital_write(Pin.P0_4, Value.HIGH)
+#    dev.digital_write(Pin.P0_5, Value.HIGH)
+#    dev.digital_write(Pin.P0_6, Value.HIGH)
+#    dev.digital_write(Pin.P0_7, Value.HIGH)
+    
+
     # Configure pin mode OUTPUT
     dev.pin_mode(Pin.P1_0, Mode.OUTPUT)
     dev.pin_mode(Pin.P1_2, Mode.OUTPUT)
@@ -273,9 +283,11 @@ if __name__ == '__main__':
     dev.pin_mode(Pin.P1_7, Mode.OUTPUT)
 
     # Write a digital pin
-    dev.digital_write(Pin.P1_3, Value.HIGH)
-    time.sleep(2)
-    dev.digital_write(Pin.P1_3, Value.LOW)
+    while(1):
+        dev.digital_write(Pin.P1_3, Value.HIGH)
+        time.sleep(1)
+        dev.digital_write(Pin.P1_3, Value.LOW)
+        time.sleep(1)
 #    # Configure pin mode INPUT
 #    dev.pin_mode(Pin.P0_0, Mode.INPUT)
 #    dev.pin_mode(Pin.P0_2, Mode.INPUT)
